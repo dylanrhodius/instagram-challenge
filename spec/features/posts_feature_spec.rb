@@ -12,13 +12,24 @@ feature 'image posts' do
 
   context 'posts have been added' do
     before do
-      Post.create(name: 'post')
+      Post.create(caption: 'The caption')
     end
 
     scenario 'display posts' do
       visit '/posts'
-      expect(page).to have_content('Post')
+      expect(page).to have_content('The caption')
       expect(page).not_to have_content('No posts yet')
+    end
+  end
+
+  context 'creating posts' do
+    scenario 'prompts user to fill out a form, then displays the new post' do
+      visit '/posts'
+      click_link 'Post a picture'
+      fill_in 'Caption', with: 'The caption'
+      click_button 'Post'
+      expect(page).to have_content 'The caption'
+      expect(current_path).to eq '/posts'
     end
   end
 
