@@ -24,6 +24,7 @@ feature 'image posts' do
 
   context 'creating posts' do
     scenario 'prompts user to fill out a form, then displays the new post' do
+      sign_up_and_in
       visit '/posts'
       click_link 'Post a picture'
       fill_in 'Caption', with: 'The caption'
@@ -35,6 +36,7 @@ feature 'image posts' do
 
   context 'an invalid post' do
   scenario 'does not let you submit a name that is too short' do
+    sign_up_and_in
     visit '/posts'
     click_link 'Post a picture'
     fill_in 'Caption', with: ''
@@ -58,6 +60,7 @@ end
 
     before { Post.create caption: 'Post', id: 1 }
     scenario 'let a user edit a post' do
+      sign_up_and_in
       visit '/posts'
       click_link 'Edit Post'
       fill_in 'Caption', with: 'caption'
@@ -74,6 +77,7 @@ end
     before { Post.create caption: 'Caption' }
 
     scenario 'removes a post when a user clicks a delete link' do
+      sign_up_and_in
       visit '/posts'
       click_link 'Delete Caption'
       expect(page).not_to have_content 'Caption'
