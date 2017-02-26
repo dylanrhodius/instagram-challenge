@@ -1,6 +1,7 @@
 <% if @posts.any? %>
   <% @posts.each do |post| %>
   <%= link_to post.caption, post_path(post) %>
+  <%= link_to "Edit #{post.caption}", edit_post_path(post) %>
   <% end %>
 <% else %>
   No posts yet

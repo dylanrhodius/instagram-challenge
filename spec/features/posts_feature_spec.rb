@@ -34,17 +34,29 @@ feature 'image posts' do
   end
 
   context 'viewing posts' do
-
   let!(:post){ Post.create(caption:'post') }
-
-  scenario 'lets a user view a restaurant' do
-   visit '/posts'
-   click_link 'post'
-   expect(page).to have_content 'post'
-   expect(current_path).to eq "/posts/#{post.id}"
+    scenario 'lets a user view a restaurant' do
+     visit '/posts'
+     click_link 'post'
+     expect(page).to have_content 'post'
+     expect(current_path).to eq "/posts/#{post.id}"
+    end
   end
 
-end
+  context 'editing posts' do
+
+    before { Post.create caption: 'Post', id: 1 }
+    scenario 'let a user edit a post' do
+      visit '/posts'
+      click_link 'Edit Post'
+      fill_in 'Caption', with: 'caption'
+      click_button 'Update Post'
+      click_link 'caption'
+      expect(page).to have_content 'caption'
+      expect(current_path).to eq '/posts/1'
+    end
+
+  end
 
 
 end
