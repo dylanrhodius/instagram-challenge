@@ -35,4 +35,12 @@ feature "User can sign in and out" do
       expect(page).not_to have_link('Sign up')
     end
   end
+
+  context 'user has not signed in' do
+   scenario 'user cannot create, edit, comment or delete a post entry if not logged in' do
+     visit('/')
+     click_link('Post a picture')
+     expect(page).to have_content 'You need to sign in or sign up before continuing.'
+   end
+  end
 end
