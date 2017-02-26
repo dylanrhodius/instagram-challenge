@@ -1,5 +1,22 @@
 <% if @posts.any? %>
   <% @posts.each do |post| %>
+    <h2>   <%= link_to post.caption, post_path(post) %> </h2>
+    <h4> <%= post.comments.last.thoughts if post.comments.any? %> </h4>
+    <% if current_user.present? && current_user.owns?(post) %>
+      <%= link_to "Edit #{post.caption}", edit_post_path(post) %>
+      <%= link_to "Delete #{post.caption}", post_path(post), method: :delete %>
+    <% end %>
+    <%= link_to "Comment #{post.caption}", new_post_comment_path(post) %>
+  <% end %>
+<% else %>
+  No posts yet
+<% end %>
+<br>
+<br>
+<a href='posts/new'>Post a picture</a>
+
+<!-- <% if @posts.any? %>
+  <% @posts.each do |post| %>
   <%= link_to post.caption, post_path(post) %>
   <%= post.comments.last.thoughts if post.comments.any? %>
   <%= link_to "Edit #{post.caption}", edit_post_path(post) %>
@@ -12,4 +29,4 @@
   No posts yet
 <% end %>
 
-<a href='posts/new'>Post a picture</a>
+<a href='posts/new'>Post a picture</a> -->
