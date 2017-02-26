@@ -58,5 +58,17 @@ feature 'image posts' do
 
   end
 
+  context 'deleting posts' do
+
+    before { Post.create caption: 'Caption' }
+
+    scenario 'removes a post when a user clicks a delete link' do
+      visit '/posts'
+      click_link 'Delete Caption'
+      expect(page).not_to have_content 'Caption'
+      expect(page).to have_content 'Post deleted successfully'
+    end
+
+  end
 
 end
