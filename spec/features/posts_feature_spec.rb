@@ -33,5 +33,18 @@ feature 'image posts' do
     end
   end
 
+  context 'viewing posts' do
+
+  let!(:post){ Post.create(caption:'post') }
+
+  scenario 'lets a user view a restaurant' do
+   visit '/posts'
+   click_link 'post'
+   expect(page).to have_content 'post'
+   expect(current_path).to eq "/posts/#{post.id}"
+  end
+
+end
+
 
 end
