@@ -2,7 +2,6 @@ require 'rails_helper'
 
 feature 'commenting' do
   before { Post.create caption: 'Caption' }
-  # before { Post.create caption: 'Caption', id: 1 }
 
   scenario 'allows users to comment on posts' do
      visit '/posts'

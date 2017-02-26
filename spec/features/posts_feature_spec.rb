@@ -33,6 +33,17 @@ feature 'image posts' do
     end
   end
 
+  context 'an invalid post' do
+  scenario 'does not let you submit a name that is too short' do
+    visit '/posts'
+    click_link 'Post a picture'
+    fill_in 'Caption', with: ''
+    click_button 'Post'
+    expect(page).not_to have_css 'h2', text: 'The caption'
+    expect(page).to have_content 'error'
+  end
+end
+
   context 'viewing posts' do
   let!(:post){ Post.create(caption:'post') }
     scenario 'lets a user view a restaurant' do
