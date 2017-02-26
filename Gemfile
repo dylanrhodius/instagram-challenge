@@ -7,6 +7,16 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+group :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem "rspec-collection_matchers"
+end
+
+
+gem 'aws-sdk'
+gem 'paperclip'
+gem 'shoulda'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'devise'
